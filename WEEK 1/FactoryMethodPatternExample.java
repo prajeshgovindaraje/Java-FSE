@@ -1,38 +1,44 @@
 import java.util.Scanner;
 
-interface Character {
-    void attack();
+interface Document {
+    void open();
 }
 
-class Warrior implements Character {
-    public void attack() {
-        System.out.println("Warrior swings a sword!");
+class WordDocument implements Document {
+    public void open() {
+        System.out.println("Word document opened.");
     }
 }
 
-class Mage implements Character {
-    public void attack() {
-        System.out.println("Mage casts a fireball!");
+class PdfDocument implements Document {
+    public void open() {
+        System.out.println("PDF document opened.");
     }
 }
 
-class Archer implements Character {
-    public void attack() {
-        System.out.println("Archer shoots an arrow!");
+class ExcelDocument implements Document {
+    public void open() {
+        System.out.println("Excel document opened.");
     }
 }
 
-class CharacterFactory {
-    public static Character create(String type) {
+class DocumentFactory {
+    public static Document create(String type) {
         switch (type.toLowerCase()) {
-            case "warrior":
-                return new Warrior();
-            case "mage":
-                return new Mage();
-            case "archer":
-                return new Archer();
-            default:
-                throw new IllegalArgumentException("Unknown character type");
+            case "word":
+                return new WordDocument();
+            case "pdf": 
+                return new PdfDocument();
+            case "excel": 
+                return new ExcelDocument();
+            case "WORD":
+                return new WordDocument();
+            case "PDF": 
+                return new PdfDocument();
+            case "EXCEL": 
+                return new ExcelDocument();
+            default: 
+                throw new IllegalArgumentException("Unknown type");
         }
     }
 }
@@ -40,11 +46,10 @@ class CharacterFactory {
 public class FactoryMethodPatternExample {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Choose your character (Warrior / Mage / Archer): ");
+        System.out.print("Enter document type: ");
         String input = sc.nextLine();
 
-        Character player = CharacterFactory.create(input);
-        player.attack();
-        sc.close();
+        Document doc = DocumentFactory.create(input);
+        doc.open();
     }
 }

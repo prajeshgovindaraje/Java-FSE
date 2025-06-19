@@ -1,31 +1,25 @@
-class Printer {
-    private static Printer singlePrinter;
-    private Printer() {
-        System.out.println("Printer is ready.");
+class Logger{
+    private static Logger i; 
+    private Logger(){
+        System.out.println("Logger class");
     }
-    public static Printer createObject() {
-        if (singlePrinter == null) {
-            singlePrinter = new Printer();
-        }
-        return singlePrinter;
+    public static Logger getInst(){
+        if(i==null){
+        i=new Logger();
     }
-    public void printDocument(String fileName) {
-        System.out.println("Printing: " + fileName);
-    }
+    return i;
 }
+public void Log(String m){
+    System.out.println("Log:"+m);
+}}
+public class SingletonPatternExample
+{
+	public static void main(String[] args) {
+	    Logger l1=Logger.getInst();
+	    l1.Log("Started");
+	    Logger l2=Logger.getInst();
+	    l2.Log("Proccessing");
 
-public class SingletonPatternExample {
-    public static void main(String[] args) {
-        Printer p1 = Printer.createObject();
-        p1.printDocument("File1.pdf");
-
-        Printer p2 = Printer.createObject();
-        p2.printDocument("File2.pdf");
-
-        if (p1 == p2) {
-            System.out.println("Both are the same printer.");
-        } else {
-            System.out.println("Different printers.");
-        }
-    }
+	    System.out.println("Loggers same:"+(l1==l2)); 
+	}
 }
