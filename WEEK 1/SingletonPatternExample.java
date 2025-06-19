@@ -14,7 +14,7 @@ class Printer {
     }
 }
 
-public class Singleton_Pattern {
+public class SingletonPatternExample {
     public static void main(String[] args) {
         Printer p1 = Printer.createObject();
         p1.printDocument("File1.pdf");
